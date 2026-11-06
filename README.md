@@ -6,6 +6,16 @@ Inference and evaluation code for PriDE-L and PriDE-M on Occ3D-nuScenes.
 
 This repository contains the SuperOcc-based implementation.
 
+Training code will be released upon acceptance of the paper.
+
+## Abstract
+
+Object-centric 3D occupancy prediction aggregates compact parametric primitives into dense semantic voxel fields for autonomous driving. The quality of the aggregated field thus hinges on each primitive. However, since primitives have no ground truth of their own, existing methods supervise them only through voxel-level losses on the aggregated field, which do not explicitly measure each primitive's prediction error on its responsible occupied voxels, limiting targeted refinement. To address this, we propose Primitive-level Difficulty-aware Enhancement (PriDE), a plug-and-play scheme that makes per-primitive difficulty an explicit, learnable quantity and uses it to guide refinement. First, PriDE constructs a *Backtraced Error Teacher*, which uses aggregation responsibilities to evaluate each primitive's own prediction error on occupied voxels during training, yielding per-primitive difficulty targets at negligible cost. Since these targets require ground truth and are unavailable at inference, a *Primitive Difficulty Scorer* then learns from them via rank-based supervision to predict the difficulty of each primitive from its inference-time state. Finally, the *Difficulty-Guided Refiner* uses the predicted difficulty to redistribute refinement toward hard primitives, letting them widen their sampling and attention to gather more context. Extensive experiments on the SurroundOcc and Occ3D datasets show that PriDE consistently improves object-centric baselines. Code is available [here](https://github.com/ovpro3d/PriDE).
+
+## Method Overview
+
+![Overview of PriDE](assets/overview.png)
+
 ## 1. Installation
 
 Follow `docs/install.md` (Python 3.9, PyTorch 1.13.1 + CUDA 11.7, mmcv-full
